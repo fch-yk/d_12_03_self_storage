@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %}<title>SelfStorage - Доставка и бережное хранение ваших вещей</title> {% endblock %}
+{% block content %}
+  <main>
+    <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body_new d-flex justify-content-center align-items-center">
+          <form class="d-flex flex-column align-items-center" style="max-width: 420px" method="post"
+                action="{% url 'login' %}">
+            {% csrf_token %}
+            <h1 class="modal-title text-center fw-bold mb-3">Вход</h1>
+
+            {{ form.username|add_class:"form-control border-8 mb-4 py-3 px-5 border-0 fs_24 SelfStorage__bg_lightgrey" |attr:"placeholder:E-mail"  | attr:"type:email" }}
+            {{ form.password|add_class:"form-control border-8 mb-4 py-3 px-5 border-0 fs_24 SelfStorage__bg_lightgrey" |attr:"placeholder:Пароль" }}
+
+            <a href="{% url 'users:password_reset' %}" class="SelfStorage_orange" aria-label="Close">Забыли пароль?</a>
+            <button
+              class="btn border-8 py-3 px-5 mt-5 mb-3 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange">
+              Войти
+            </button>
+            <span>Нет аккаунта?  <a href="{% url 'users:signup' %}">Зарегистрируйтесь на сайте</a></span>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

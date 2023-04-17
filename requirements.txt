@@ -3,3 +3,4 @@ environs[django]==9.5.0
 django-debug-toolbar==4.0.0
 gunicorn==20.0.2
 psycopg2-binary==2.9.5
+django-widget-tweaks==1.4.12

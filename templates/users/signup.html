@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}<title>Foodplan 2021 - Меню на неделю FOODPLAN</title> {% endblock %}
+
+{% block content %}
+  <main style="margin-top: calc(2rem + 85px);">
+    <section>
+      <div class="container">
+        {% include 'includes/content_header.html' with header_text='Регистрация' %}
+
+        <div class="card px-5 py-3 d-flex align-items-center foodplan__shadow">
+
+          {% if form.errors %}
+            {% for field in form %}
+              {% for error in field.errors %}
+                <div class="alert alert-danger">
+                  {{ error|escape }}
+                </div>
+              {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+              <div class="alert alert-danger">
+                {{ error|escape }}
+              </div>
+            {% endfor %}
+          {% endif %}
+
+          <form method="post" action="{% url 'users:signup' %}">
+            {% csrf_token %}
+            {# Выводим поля в цикле, по отдельности #}
+            {% for field in form %}
+              <div class="mb-3">
+                <label for="{{ field.id_for_label }}">
+                  {{ field.label }}
+                  {% if field.field.required %}
+                    <span class="required text-danger">*</span>
+                  {% endif %}
+                </label>
+
+                {{ field|add_class:"form-control" }}
+                {% if field.help_text %}
+                  <small
+                          id="{{ field.id_for_label }}-help"
+                          class="form-text text-muted"
+                  >
+                    {{ field.help_text|safe }}
+                  </small>
+                {% endif %}
+              </div>
+            {% endfor %}
+
+            <div class="row mb-3">
+              <div class="col-12 col-sm-6 mt-3">
+                <button type="submit"
+                        class="btn  shadow-nonew-100 btn-outline-success foodplan_green foodplan__border_green">
+                  Регистрация
+                </button>
+              </div>
+              <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center align-items-center">
+                <small>Уже есть аккаунт? <a href="{% url 'users:login' %}"
+                                            class="link-dark foodplan_green">Войти</a></small>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock %}
