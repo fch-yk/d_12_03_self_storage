@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'users',
     'storage',
 ]
 
@@ -57,6 +58,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'self_storage.urls'
+AUTH_USER_MODEL = 'users.User'
 
 TEMPLATES = [
     {
