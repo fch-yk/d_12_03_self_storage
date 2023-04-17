@@ -3,4 +3,5 @@ from django.shortcuts import render
 
 def show_home(request):
     context = {}
-    return render(request, 'index.html', context=context)
+    template = 'storage/index.html'
+    return render(request, template, context=context)

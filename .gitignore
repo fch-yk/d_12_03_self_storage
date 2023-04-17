@@ -161,3 +161,4 @@ dmypy.json
 cython_debug/
 
 .parcel-cache/
+.idea
