@@ -1,17 +1,14 @@
 {% extends 'base.html' %}
-{% load static %}
 {% load widget_tweaks %}
-{% block title %}<title>Foodplan 2021 - Меню на неделю FOODPLAN</title> {% endblock %}
-
+{% block title %}<title>SelfStorage - Регистрация аккаунта</title> {% endblock %}
 {% block content %}
-  <main style="margin-top: calc(2rem + 85px);">
-    <section>
-      <div class="container">
-        {% include 'includes/content_header.html' with header_text='Регистрация' %}
+  <main>
+    <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
+      <div class="modal-content">
 
-        <div class="card px-5 py-3 d-flex align-items-center foodplan__shadow">
+        <div class="modal-body_new d-flex justify-content-center align-items-center">
 
-          {% if form.errors %}
+            {% if form.errors %}
             {% for field in form %}
               {% for error in field.errors %}
                 <div class="alert alert-danger">
@@ -26,10 +23,12 @@
             {% endfor %}
           {% endif %}
 
-          <form method="post" action="{% url 'users:signup' %}">
+
+          <form class="d-flex flex-column align-items-center" style="max-width: 420px" method="post"
+                action="{% url 'users:signup' %}">
             {% csrf_token %}
-            {# Выводим поля в цикле, по отдельности #}
-            {% for field in form %}
+            <h1 class="modal-title text-center fw-bold mb-3">Регистрация</h1>
+              {% for field in form %}
               <div class="mb-3">
                 <label for="{{ field.id_for_label }}">
                   {{ field.label }}
@@ -38,33 +37,17 @@
                   {% endif %}
                 </label>
 
-                {{ field|add_class:"form-control" }}
-                {% if field.help_text %}
-                  <small
-                          id="{{ field.id_for_label }}-help"
-                          class="form-text text-muted"
-                  >
-                    {{ field.help_text|safe }}
-                  </small>
-                {% endif %}
+                {{ field|add_class:"form-control border-8 mb-4 py-3 px-5 border-0 fs_24 SelfStorage__bg_lightgrey"}}
+
               </div>
             {% endfor %}
 
-            <div class="row mb-3">
-              <div class="col-12 col-sm-6 mt-3">
-                <button type="submit"
-                        class="btn  shadow-nonew-100 btn-outline-success foodplan_green foodplan__border_green">
-                  Регистрация
-                </button>
-              </div>
-              <div class="col-12 col-sm-6 mt-3 d-flex justify-content-center align-items-center">
-                <small>Уже есть аккаунт? <a href="{% url 'users:login' %}"
-                                            class="link-dark foodplan_green">Войти</a></small>
-              </div>
-            </div>
+            <span class="fw-light SelfStorage_grey">Нажимая на кнопку, вы подтверждаете свое <a href="#" class="SelfStorage_grey">согласие на обработку персональных данных</a></span>
+            <button type="submit" class="btn border-8 py-3 px-5 mt-5 mb-3 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange">Зарегистрироваться</button>
+            <span>Уже зарегистрированы? <a href="{% url 'users:login' %}" class="SelfStorage_orange" data-bs-toggle="modal" data-bs-target="#SignModal" data-bs-dismiss="modal" aria-label="Close">Войти в личный кабинет</a></span>
           </form>
         </div>
       </div>
-    </section>
+    </div>
   </main>
 {% endblock %}

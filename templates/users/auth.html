@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
-{% load static %}
 {% block title %}<title>SelfStorage - Доставка и бережное хранение ваших вещей</title> {% endblock %}
 {% block content %}
   <main>
@@ -21,7 +20,7 @@
               class="btn border-8 py-3 px-5 mt-5 mb-3 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange">
               Войти
             </button>
-            <span>Нет аккаунта?  <a href="{% url 'users:signup' %}">Зарегистрируйтесь на сайте</a></span>
+            <span>Нет аккаунта?  <a href="{% url 'users:signup' %}"  class="SelfStorage_orange">Зарегистрируйтесь на сайте</a></span>
           </form>
         </div>
       </div>
