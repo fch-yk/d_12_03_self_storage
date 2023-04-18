@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 {% block title %}<title>SelfStorage - Регистрация аккаунта</title> {% endblock %}
 {% block content %}
@@ -39,7 +40,7 @@
               </div>
             {% endfor %}
 
-            <span class="fw-light SelfStorage_grey">Нажимая на кнопку, вы подтверждаете свое <a href="#"
+            <span class="fw-light SelfStorage_grey">Нажимая на кнопку, вы подтверждаете свое <a href="{% static 'pd_agreement.pdf' %}"
                                                                                                 class="SelfStorage_grey">согласие на обработку персональных данных</a></span>
             <button type="submit"
                     class="btn border-8 py-3 px-5 mt-5 mb-3 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange">
