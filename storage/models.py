@@ -6,8 +6,21 @@ from users.models import User
 
 
 class Storage(models.Model):
+    NEAR_THE_SUBWAY = "NEAR_THE_SUBWAY"
+    PARKING = "PARKING"
+    HIGH_CEILING = "HIGH_CEILING"
+    PROPERTY_CHOICES = [
+        (NEAR_THE_SUBWAY, "Рядом с метро"),
+        (PARKING, "Парковка"),
+        (HIGH_CEILING, "Высокие потолки")
+    ]
     city = models.CharField(verbose_name='Город', max_length=100)
     address = models.CharField(verbose_name='Адрес склада', max_length=100)
+    description = models.TextField(verbose_name='Описание склада', blank=True)
+    temperature = models.SmallIntegerField(verbose_name='Температура на складе', blank=True, null=True)
+    contact = models.TextField(verbose_name='Контакты склада', blank=True)
+    route_description = models.TextField(verbose_name='Проезд до склада', blank=True)
+    special_property = models.CharField(verbose_name='Свойство склада', choices=PROPERTY_CHOICES, blank=True, max_length=25)
 
     class Meta:
         verbose_name = 'Склад'
@@ -50,3 +63,15 @@ class Order (models.Model):
 
     def __str__(self):
         return f'{self.pk} - {self.customer}'
+
+
+class Image(models.Model):
+    storage = models.ForeignKey(Storage, verbose_name='Склад', related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(verbose_name='Изображение', upload_to='imgs/')
+
+    class Meta:
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения'
+
+    def __str__(self):
+        return f'{self.pk} - {self.storage}'
