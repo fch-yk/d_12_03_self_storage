@@ -63,3 +63,15 @@ class Order (models.Model):
 
     def __str__(self):
         return f'{self.pk} - {self.customer}'
+
+
+class Image(models.Model):
+    storage = models.ForeignKey(Storage, verbose_name='Склад', related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(verbose_name='Изображение', upload_to='imgs/')
+
+    class Meta:
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения'
+
+    def __str__(self):
+        return f'{self.pk} - {self.storage}'
