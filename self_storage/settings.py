@@ -150,3 +150,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = env.str('EMAIL_HOST', default='smtp.yandex.ru')
+EMAIL_PORT = env.int('EMAIL_PORT', default=465)
+EMAIL_HOST_USER = env.str('EMAIL_HOST_USER', default='user')
+EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD', default='password')
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=False)
+EMAIL_USE_SSL = env.bool('EMAIL_USE_SSL', default=True)
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

@@ -5,10 +5,8 @@
   <main>
     <div class="modal-dialog modal-dialog-scrollable modal-fullscreen">
       <div class="modal-content">
-
         <div class="modal-body_new d-flex justify-content-center align-items-center">
-
-            {% if form.errors %}
+          {% if form.errors %}
             {% for field in form %}
               {% for error in field.errors %}
                 <div class="alert alert-danger">
@@ -23,12 +21,11 @@
             {% endfor %}
           {% endif %}
 
-
           <form class="d-flex flex-column align-items-center" style="max-width: 420px" method="post"
                 action="{% url 'users:signup' %}">
             {% csrf_token %}
             <h1 class="modal-title text-center fw-bold mb-3">Регистрация</h1>
-              {% for field in form %}
+            {% for field in form %}
               <div class="mb-3">
                 <label for="{{ field.id_for_label }}">
                   {{ field.label }}
@@ -37,14 +34,20 @@
                   {% endif %}
                 </label>
 
-                {{ field|add_class:"form-control border-8 mb-4 py-3 px-5 border-0 fs_24 SelfStorage__bg_lightgrey"}}
+                {{ field|add_class:"form-control border-8 mb-4 py-3 px-5 border-0 fs_24 SelfStorage__bg_lightgrey" }}
 
               </div>
             {% endfor %}
 
-            <span class="fw-light SelfStorage_grey">Нажимая на кнопку, вы подтверждаете свое <a href="#" class="SelfStorage_grey">согласие на обработку персональных данных</a></span>
-            <button type="submit" class="btn border-8 py-3 px-5 mt-5 mb-3 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange">Зарегистрироваться</button>
-            <span>Уже зарегистрированы? <a href="{% url 'users:login' %}" class="SelfStorage_orange" data-bs-toggle="modal" data-bs-target="#SignModal" data-bs-dismiss="modal" aria-label="Close">Войти в личный кабинет</a></span>
+            <span class="fw-light SelfStorage_grey">Нажимая на кнопку, вы подтверждаете свое <a href="#"
+                                                                                                class="SelfStorage_grey">согласие на обработку персональных данных</a></span>
+            <button type="submit"
+                    class="btn border-8 py-3 px-5 mt-5 mb-3 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange">
+              Зарегистрироваться
+            </button>
+            <span>Уже зарегистрированы? <a href="{% url 'users:login' %}" class="SelfStorage_orange"
+                                           data-bs-toggle="modal" data-bs-target="#SignModal" data-bs-dismiss="modal"
+                                           aria-label="Close">Войти в личный кабинет</a></span>
           </form>
         </div>
       </div>
