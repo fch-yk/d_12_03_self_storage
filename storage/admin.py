@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from storage.models import Storage, Image, Box
+from storage.models import Storage, Image, Box, Order
 
 
 @admin.register(Storage)
@@ -18,3 +18,6 @@ class ImageAdmin(admin.ModelAdmin):
     pass
 
 
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    pass
