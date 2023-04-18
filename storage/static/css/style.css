@@ -83,6 +83,12 @@ body {
     border-color: white;
     background-color: white;
 }
+.SelfStorage__name_input:read-only {
+    border-color: white;
+    background-color: white;
+    text-align: center;
+}
+
 .SelfStorage_tab.active {
     color: #579586 !important;
 }
@@ -148,6 +154,10 @@ body {
 .SelfStorage__input {
 
 }
+.SelfStorage__name_input {
+
+}
+
 .z-index-1 {
     z-index: -1;
 }
