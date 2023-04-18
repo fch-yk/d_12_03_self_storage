@@ -1,132 +1,123 @@
 {% extends 'base.html' %}
+
 {% load static %}
-{% load widget_tweaks %}
-{% block title %}<title>Foodplan 2021 - Меню на неделю FOODPLAN</title> {% endblock %}
+{% block title %}<title>SelfStorage - Доставка и бережное хранение</title> {% endblock %}
+
 
 {% block content %}
-  <main style="margin-top: calc(2rem + 85px);">
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="card col-12 p-3 mb-5 foodplan__shadow">
-            <h4 class="foodplan__backButton">
-              <strong><small><a href="#" class="link-secondary fw-light"></a></small></strong>
-            </h4>
-            <h2 class="text-center"><strong>Личный кабинет</strong></h2>
-          </div>
-
-          <div class="card col-12 col-md-2 p-3 mb-3 d-flex flex-column align-items-center foodplan__shadow">
-            <div class="position-relative">
-              <img src="{% static 'img/test_avatar.png' %}" alt="" width="100" height="100" class="rounded-pill">
-              <span class="badge rounded-circle position-absolute bottom-0 end-0 foodplan__bg_green avatar__plus"><a
-                      href="#"
-                      class="link-dark text-decoration-none align-middle">+</a></span>
-            </div>
-            <h3 class="card-title text-center">{{ current_user.first_name }} {{ current_user.last_name }}</h3>
-            <a class="d-block">
-              <a href="{% url 'users:logout' %}"
-              <button class="btn btn-outline-success shadow-none foodplan_green foodplan__border_green">Выйти</button>
-            </a>
-
-          </div>
-
-          <div class="card col-12 col-md-10 p-3 mb-3 foodplan__shadow">
-            <ul class="nav nav-tabs">
-              <li class="nav-item foodplan__tab-item">
-                <button id="tab1" class="btn shadow-none foodplan__tab-button active" data-bs-toggle="tab"
-                        data-bs-target="#data">Персональные данные
-                </button>
-              </li>
-              <li class="nav-item foodplan__tab-item">
-                <button id="tab2" class="btn shadow-none foodplan__tab-button" data-bs-toggle="tab"
-                        data-bs-target="#menu">Моё меню
-                </button>
-              </li>
-              <li class="nav-item foodplan__tab-item flex-grow-1"></li>
-            </ul>
-            <div class="tab-content mt-2">
-              <div class="tab-pane fade show active" id="data">
-                <form action="">
-                  <div class="mb-3">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <label for="exampleInputEmail1" class="form-label">Имя</label>
-                      <small><a href="#" class="link-dark foodplan_green">изменить</a></small>
-                    </div>
-                    <input type="text" class="form-control" id="name"
-                           value="{{ current_user.first_name }} {{ current_user.last_name }}">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                           value="{{ current_user.email }}">
-                  </div>
-                  <div class="mb-3">
-                    <div class="d-flex align-items-center justify-content-between">
-                      <label for="exampleInputPassword1" class="form-label">Пароль</label>
-                      <small><a href="#" class="link-dark foodplan_green">изменить</a></small>
-                    </div>
-
-                    <input type="password" class="form-control" id="password">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Подтверждение пароля</label>
-                    <input type="password" class="form-control" id="PasswordConfirm">
-                  </div>
-                  <div class="d-block">
-                    <button type="submit"
-                            class="btn shadow-none btn-outline-success foodplan_green foodplan__border_green">Сохранить
-                      изменения
-                    </button>
-                  </div>
+  <main class="container mt-header">
+    <div class="row" role="tablist">
+      <div class="col-lg-3 d-flex flex-column nav nav-pills">
+        <button class="ps-0 btn bg-white fs_24 shadow-none SelfStorage_orange SelfStorage_tab active" id="LK-tab"
+                data-bs-toggle="pill" data-bs-target="#LK" type="button" role="tab" aria-controls="LK"
+                aria-selected="true">Личный кабинет
+        </button>
+        <button class="ps-0 btn bg-white fs_24 shadow-none SelfStorage_grey SelfStorage_tab" id="Rent-tab"
+                data-bs-toggle="pill" data-bs-target="#Rent" type="button" role="tab" aria-controls="Rent"
+                aria-selected="false">Моя аренда
+        </button>
+        <a href="{% url "storage:faq" %}" class="btn fs_24 shadow-none text-decoration-none SelfStorage_grey SelfStorage_tab">FAQ</a>
+        <a href="#" class="btn fs_24 shadow-none text-decoration-none SelfStorage_grey SelfStorage_tab">Выйти</a>
+      </div>
+      <div class="col-lg-9">
+        <div class="card tab-content p-5">
+          <div class="tab-pane fade show active" id="LK" role="tabpanel" aria-labelledby="LK-tab">
+            <div class="row">
+              <div class="col-12 col-sm-5 d-flex flex-column align-items-center">
+                <img src="img/image10.png" class="rounded-pill mb-3" alt="">
+                <h4>{{ current_user.get_full_name }}</h4>
+              </div>
+              <div class="col-12 col-sm-7 d-flex flex-column">
+                <form>
+                  <label class="fs_24 SelfStorage_green ms-2" for="EMAIL">E-mail</label>
+                  <input type="email" name="EMAIL_EDIT" id="EMAIL" class="form-control fs_24 ps-2 SelfStorage__input"
+                         value="{{ current_user.email }}" disabled>
+                  <label class="fs_24 SelfStorage_green ms-2" for="PHONE">Телефон</label>
+                  <input type="tel" name="PHONE_EDIT" id="PHONE" class="form-control fs_24 ps-2 SelfStorage__input"
+                         value="{{ current_user.phone }}" disabled>
+                  <label class="fs_24 SelfStorage_green ms-2" for="PASSWORD">Пароль</label>
+                  <input type="password" name="PASSWORD_EDIT" id="PASSWORD"
+                         class="form-control fs_24 ps-2 SelfStorage__input" value="111111111" disabled>
+                  <button type="submit" class="btn SelfStorage_green ps-1" id="save" style="display: none">Сохранить
+                  </button>
+                  <a class="btn SelfStorage_orange ps-1" id="edit">Редактировать</a>
+                  <script>
+                    document.getElementById('edit').addEventListener('click', e => {
+                      e.preventDefault()
+                      document.getElementById('EMAIL').disabled = false
+                      document.getElementById('PHONE').disabled = false
+                      document.getElementById('PASSWORD').disabled = false
+                      document.getElementById('PASSWORD').type = 'text'
+                      document.getElementById('edit').style.display = 'none'
+                      document.getElementById('save').style.display = 'inline-block'
+                    })
+                    document.getElementById('save').addEventListener('click', () => {
+                      setTimeout(() => {
+                        document.getElementById('EMAIL').disabled = true
+                        document.getElementById('PHONE').disabled = true
+                        document.getElementById('PASSWORD').disabled = true
+                        document.getElementById('PASSWORD').type = 'password'
+                        document.getElementById('edit').style.display = 'inline-block'
+                        document.getElementById('save').style.display = 'none'
+                      }, 0)
+                    })
+                  </script>
                 </form>
               </div>
-              <div class="tab-pane fade" id="menu">
-                <div class="row">
-                  <div class="col-2">
-                    <img src="{% static 'img/circle1.png' %}" alt="" class="w-100">
-                  </div>
-                  <div class="col-10 col-md-10">
-                    <div class="row">
-                      {% if user_plan %}
-                        <div class="col-12">
-                          <a href="{% url 'users:user_plan' current_user.username current_user.plan_id %}"><h2>Меню {{ user_plan.menu.get_menu_type_display }}</h2></a>
-                        </div>
-                        <div class="col-md-12 col-lg-9">
-                          <h6>Описание подписки: {{ user_plan.plan_description }}</h6>
-                        </div>
-                        <div class="col-md-12 col-lg-3 text-muted d-flex flex-column justify-content-between">
-                          <div class="d-flex flex-row justify-content-between">
-                            <small>Персоны: </small><small>{{ user_plan.persons_number }}</small>
-                          </div>
-                          <div class="d-flex flex-row justify-content-between">
-                            <small>Аллергии: </small><small>{{ user_plan.allergy }}</small>
-                          </div>
-                          <div class="d-flex flex-row justify-content-between">
-                            <small>Калории: </small><small>1400</small>
-                          </div>
-                          <div class="d-flex flex-row justify-content-between">
-                            <small>Кол-во приёмов пищи: </small><small>{{ user_plan.meals_number }}</small>
-                          </div>
-                        </div>
-                      {% else %}
-                        <div class="col-12">
-                          <a href="/order/"><h2>Выбрать план питания</h2></a>
-                        </div>
-                        <div class="col-md-12 col-lg-9">
-                          <h6>На данный момент у вас нет подписки и не выбран план питания</h6>
-                        </div>
-                        <div class="col-md-12 col-lg-3 text-muted d-flex flex-column justify-content-between">
-                        </div>
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="Rent" role="tabpanel" aria-labelledby="Rent-tab">
+            <h1 class="fw-bold SelfStorage_green mb-5">Добрый день, {{ current_user.first_name }}!</h1>
+            <a href="#" class="SelfStorage_orange">История аренды</a>
+            <h4 class="SelfStorage_grey my-3">Срок Вашей аренды подходит к концу :(<br>Вы можете продлить аренду или
+              забрать вещи до 28 июня 2022 года включительно.</h4>
+            <div class="mb-5">
+              <h4 class="SelfStorage_green">Мой склад №1</h4>
+              <h4>Одинцово, ул. Северная, д. 36</h4>
+              <h4 class="SelfStorage_green">Мой бокс</h4>
+              <h4>№2389-12</h4>
+              <h4 class="SelfStorage_green">Срок аренды</h4>
+              <h4>15.03.2022 - 28.06.2022</h4>
+              <div>
+                <button
+                  class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_green SelfStorage__btn2_green mb-3">
+                  Продлить аренду
+                </button>
               </div>
+              <div>
+                <button
+                  class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_orange SelfStorage__btn2_orange mb-3">
+                  Открыть бокс
+                </button>
+              </div>
+              <a href="#" class="SelfStorage_orange">Нужна помощь?</a>
             </div>
 
+            <div class="mb-5">
+              <h4 class="SelfStorage_green">Мой склад №2</h4>
+              <h4>Люберцы, ул. Советская, д. 88</h4>
+              <h4 class="SelfStorage_green">Мой бокс</h4>
+              <h4>№2335-10</h4>
+              <h4 class="SelfStorage_green">Срок аренды</h4>
+              <h4>18.03.2022 - 21.09.2022</h4>
+              <div>
+                <button
+                  class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_green SelfStorage__btn2_green mb-3">
+                  Продлить аренду
+                </button>
+              </div>
+              <div>
+                <button
+                  class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_orange SelfStorage__btn2_orange mb-3">
+                  Открыть бокс
+                </button>
+              </div>
+              <a href="#" class="SelfStorage_orange">Нужна помощь?</a>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </main>
+
 {% endblock %}
