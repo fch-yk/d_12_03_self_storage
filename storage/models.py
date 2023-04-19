@@ -1,8 +1,27 @@
 import datetime
 
 from django.db import models
+from django.db.models import Min, Count, Q
 
 from users.models import User
+
+
+class StorageQuerySet(models.QuerySet):
+    def min_price(self):
+        return self.annotate(min_price=Min('boxes__price'))
+
+    def available_boxes(self):
+        return self.annotate(
+            empty_boxes=Count(
+                'boxes',
+                filter=Q(boxes__is_available=True),
+                distinct=True
+            ),
+            all_boxes=Count(
+                'boxes',
+                distinct=True
+            )
+        )
 
 
 class Storage(models.Model):
@@ -22,6 +41,8 @@ class Storage(models.Model):
     contact = models.TextField(verbose_name='Контакты склада', blank=True)
     route_description = models.TextField(verbose_name='Проезд до склада', blank=True)
     special_property = models.CharField(verbose_name='Свойство склада', choices=PROPERTY_CHOICES, blank=True, max_length=25)
+
+    objects = StorageQuerySet.as_manager()
 
     class Meta:
         verbose_name = 'Склад'
