@@ -1,6 +1,7 @@
+from django.conf.urls.static import static
 from django.urls import path
 
-
+from self_storage import settings
 from storage import views
 
 app_name = 'storage'
