@@ -16,7 +16,8 @@ def show_faq_page(request):
 
 
 def show_boxes_page(request):
-    storages = Storage.objects.min_price().available_boxes().all()
+    storages = Storage.objects.prefetch_related('boxes').min_price().available_boxes().all()
+
     context = {'storages': storages}
     template = 'storage/boxes.html'
     return render(request, template, context=context)
