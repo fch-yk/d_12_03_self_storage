@@ -5,19 +5,21 @@ from storage.models import Storage
 
 def show_home(request):
     context = {}
-    template = 'storage/index.html'
+    template = "storage/index.html"
     return render(request, template, context=context)
 
 
 def show_faq_page(request):
     context = {}
-    template = 'storage/faq.html'
+    template = "storage/faq.html"
     return render(request, template, context=context)
 
 
 def show_boxes_page(request):
-    storages = Storage.objects.prefetch_related('boxes').min_price().available_boxes().all()
+    storages = (
+        Storage.objects.prefetch_related("boxes").min_price().available_boxes().all()
+    )
 
-    context = {'storages': storages}
-    template = 'storage/boxes.html'
+    context = {"storages": storages}
+    template = "storage/boxes.html"
     return render(request, template, context=context)
