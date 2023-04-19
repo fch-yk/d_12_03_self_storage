@@ -18,6 +18,7 @@ class Storage(models.Model):
     address = models.CharField(verbose_name='Адрес склада', max_length=100)
     description = models.TextField(verbose_name='Описание склада', blank=True)
     temperature = models.SmallIntegerField(verbose_name='Температура на складе', blank=True, null=True)
+    max_height = models.DecimalField(verbose_name='Максимальная высота потолка', decimal_places=2, max_digits=5)
     contact = models.TextField(verbose_name='Контакты склада', blank=True)
     route_description = models.TextField(verbose_name='Проезд до склада', blank=True)
     special_property = models.CharField(verbose_name='Свойство склада', choices=PROPERTY_CHOICES, blank=True, max_length=25)
@@ -32,6 +33,7 @@ class Storage(models.Model):
 
 class Box(models.Model):
     storage = models.ForeignKey(Storage, verbose_name='Склад', related_name='boxes', on_delete=models.CASCADE)
+    floor = models.SmallIntegerField(verbose_name='Этаж', blank=True, null=True)
     number = models.CharField(verbose_name='Номер бокса', max_length=25)
     width = models.FloatField('ширина')
     length = models.FloatField('длина')
