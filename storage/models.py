@@ -107,8 +107,8 @@ class Order(models.Model):
     )
     end_order = models.DateField(verbose_name="Конец аренды")
     is_payment = models.BooleanField(verbose_name="Оплачен")
-    need_delivery = models.BooleanField(verbose_name="Требуется доставка")
-    need_measurements = models.BooleanField(verbose_name="Требуется замер")
+    need_delivery = models.BooleanField(verbose_name="Требуется доставка", default=False)
+    need_measurements = models.BooleanField(verbose_name="Требуется замер", default=False)
     price = models.PositiveSmallIntegerField(verbose_name="Стоимость")
 
     class Meta:
