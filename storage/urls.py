@@ -11,4 +11,5 @@ urlpatterns = [
     path('faq/', views.show_faq_page, name='faq'),
     path('boxes/', views.show_boxes_page, name='boxes'),
     path('boxes/<int:box_id>/payment', views.show_payment_page, name='payment'),
+    path('make_qr_code/<int:order_id>/', views.make_qr_code, name='make_qr_code'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
