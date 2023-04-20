@@ -59,7 +59,7 @@
         {% for storage in storages %}
           document.getElementById('pills-{{ storage.id}}-tab').addEventListener('click', () => {
             document.getElementById('toBox').click()
-            })
+          })
         {% endfor %}
       </script>
     </article>
@@ -199,24 +199,37 @@
             </ul>
 
             <div class="tab-content" id="pills-tabContent">
-              {% for box in storage.boxes.all %}
-                <a href="#" class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink">
-                  <div class="col-12 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-                    <span class="SelfStorage_green fs_24 me-2">{{ box.floor }} эт.</span><span
-                    class="fs_24">№{{ box.number }}</span>
-                  </div>
-                  <div class="col-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-                    <span class="fs_24">{% widthratio box.width box.length 100%} м²</span>
-                  </div>
-                  <div class="col-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-                    <span class="fs_24">{{ box.width }} х {{ box.length }} х {{ box.height }} м²</span>
-                  </div>
-                  <div class="col-12 col-lg-3">
-                  <span
-                    class="btn my-2 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange border-8">От {{ box.price }} ₽</span>
-                  </div>
-                </a>
-              {% endfor %}
+              <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-home-tab">
+                {% for box in storage.boxes.all %}
+                  {% include 'includes/box_info.html' %}
+                {% endfor %}
+              </div>
+
+              <div class="tab-pane fade" id="pills-to3" role="tabpanel" aria-labelledby="pills-home-tab">
+                {% for box in storage.boxes.all %}
+                  {% if box.square < 3 %}
+                   {% include 'includes/box_info.html' %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+              <div class="tab-pane fade" id="pills-to10" role="tabpanel" aria-labelledby="pills-home-tab">
+                {% for box in storage.boxes.all %}
+                  {% if box.square < 10 %}
+                   {% include 'includes/box_info.html' %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+              <div class="tab-pane fade" id="pills-from10" role="tabpanel" aria-labelledby="pills-home-tab">
+                {% for box in storage.boxes.all %}
+                  {% if box.square >= 10 %}
+                   {% include 'includes/box_info.html' %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+
             </div>
           </div>
         {% endfor %}
@@ -233,37 +246,7 @@
           document.getElementById('btn-collapse-to10').addEventListener('click', () => document.getElementById('btn-collapse-to10').classList.add('d-none'))
         </script>
       </div>
-      </div>
-      <div class="tab-pane fade" id="pills-from10" role="tabpanel" aria-labelledby="pills-contact-tab">
-        <a href="#" class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink">
-          <div class="col-12 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-            <span class="SelfStorage_green fs_24 me-2">3 эт.</span><span class="fs_24">№7890-11</span>
-          </div>
-          <div class="col-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-            <span class="fs_24">10 м²</span>
-          </div>
-          <div class="col-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-            <span class="fs_24">5 х 2 х 1 м²</span>
-          </div>
-          <div class="col-12 col-lg-3">
-            <span class="btn my-2 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange border-8">От 7890 ₽</span>
-          </div>
-        </a>
-        <a href="#" class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink">
-          <div class="col-12 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-            <span class="SelfStorage_green fs_24 me-2">3 эт.</span><span class="fs_24">№8901-23</span>
-          </div>
-          <div class="col-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-            <span class="fs_24">11 м²</span>
-          </div>
-          <div class="col-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center">
-            <span class="fs_24">5 х 4 х 1 м²</span>
-          </div>
-          <div class="col-12 col-lg-3">
-            <span class="btn my-2 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange border-8">От 8901 ₽</span>
-          </div>
-        </a>
-      </div>
+
       </div>
     </article>
   </main>
