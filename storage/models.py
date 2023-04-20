@@ -1,7 +1,8 @@
 import datetime
 
 from django.db import models
-from django.db.models import Min, Count, Q
+from django.db.models import Min, Count, Q, F
+
 
 from users.models import User
 
@@ -90,6 +91,12 @@ class Box(models.Model):
         return f"{self.number} - {self.is_available}"
 
 
+class OrderQuerySet(models.QuerySet):
+    def days_left(self):
+        today = datetime.datetime.now().date()
+        return self.annotate(days_left=F("end_order") - today)
+
+
 class Order(models.Model):
     customer = models.ForeignKey(
         User,
@@ -111,6 +118,8 @@ class Order(models.Model):
     need_delivery = models.BooleanField(verbose_name="Требуется доставка", default=False)
     need_measurements = models.BooleanField(verbose_name="Требуется замер", default=False)
     price = models.PositiveSmallIntegerField(verbose_name="Стоимость")
+
+    objects = OrderQuerySet.as_manager()
 
     class Meta:
         verbose_name = "Заказ"
