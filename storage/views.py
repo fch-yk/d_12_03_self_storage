@@ -65,7 +65,6 @@ def make_qr_code(request, order_id):
     '''
     qr = qrcode.QRCode(version=1, box_size=10, border=5)
     qr.add_data(order_info)
-    # qr.make(fit=True)
     qr_code = qr.make_image(fill_color="black", back_color="white")
     qr_bytes = io.BytesIO()
     qr_code.save(qr_bytes, format='PNG')
@@ -78,4 +77,5 @@ def make_qr_code(request, order_id):
         [request.user.email],
     )
     email.attach(image)
+    email.send()
     return redirect("users:profile", request.user.username)
