@@ -17,7 +17,9 @@
           <button class="btn border-8 py-3 px-5 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange">
             Рассчитать стоимость
           </button>
-          <span class="text-center fw-light">Нажимая на кнопку, вы подтверждаете свое <a href="{% static 'pd_agreement.pdf' %}" class="link-dark">согласие на обработку персональных данных</a></span>
+          <span class="text-center fw-light">Нажимая на кнопку, вы подтверждаете свое <a
+            href="{% static 'pd_agreement.pdf' %}"
+            class="link-dark">согласие на обработку персональных данных</a></span>
         </form>
       </div>
       <div class="col-12 col-lg-6 SelfStorage__img"></div>
@@ -70,8 +72,11 @@
           </div>
 
           <h4 class="text-white mt-5 mb-3">Бокс от 190 р. за м²</h4>
-          <button class="btn fs_24 SelfStorage_green bg-white SelfStorage__btn_green border-8 w-50 py-3">Подробнее
+          <button class="btn fs_24 SelfStorage_green bg-white SelfStorage__btn_green border-8 w-50 py-3"
+                  onclick="location.href='{% url "storage:boxes" %}'">
+            Подробнее
           </button>
+
         </div>
       </div>
       <div class="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-start">
@@ -86,8 +91,11 @@
             <span class="text-white">Другие идеи хранения</span>
           </div>
           <h4 class="text-white mt-5 mb-3">Бокс от 210 р. за м²</h4>
-          <button class="btn fs_24 SelfStorage_orange bg-white SelfStorage__btn_orange border-8 w-50 py-3">Подробнее
+          <button class="btn fs_24 SelfStorage_orange bg-white SelfStorage__btn_orange border-8 w-50 py-3"
+                  onclick="location.href='{% url "storage:boxes" %}'">
+            Подробнее
           </button>
+
         </div>
       </div>
     </article>
@@ -199,7 +207,7 @@
                 </div>
               </div>
               <div class="col-12 col-lg-6 d-flex flex-column align-items-center justify-content-center">
-                <img src="{% static "img/img1.png"%}" width="290" height="290" class="rounded-pill mb-3" alt="">
+                <img src="{% static "img/img1.png" %}" width="290" height="290" class="rounded-pill mb-3" alt="">
                 <span class="fw-bold">Катерина Петрова</span>
                 <span>Одинцово</span>
               </div>
@@ -217,7 +225,7 @@
                 </div>
               </div>
               <div class="col-12 col-lg-6 d-flex flex-column align-items-center justify-content-center">
-                <img src="{% static "img/img2.png"%}" width="290" height="290" class="rounded-pill mb-3" alt="">
+                <img src="{% static "img/img2.png" %}" width="290" height="290" class="rounded-pill mb-3" alt="">
                 <span class="fw-bold">Николай Овсянников</span>
                 <span>Люберцы</span>
               </div>
@@ -248,6 +256,6 @@
       </div>
     </article>
   </main>
-{% include 'includes/aside-footer.html' %}
+  {% include 'includes/aside-footer.html' %}
 {% endblock %}
 

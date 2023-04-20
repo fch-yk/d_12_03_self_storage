@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 
+from storage.models import Order
 from .forms import CreationForm
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
@@ -12,10 +13,13 @@ class SignUp(CreateView):
     success_url = reverse_lazy('storage:index')
     template_name = 'users/signup.html'
 
+
 def profile(request, username):
     current_user = get_object_or_404(User, username=username)
+    orders = Order.objects.filter(customer=current_user).days_left()
     context = {
         'current_user': current_user,
+        'orders': orders,
     }
 
     if request.POST:
@@ -39,7 +43,6 @@ def profile(request, username):
         current_user.set_password(request_data["PASSWORD_EDIT"])
         current_user.save()
         return redirect("users:login")
-
 
     return render(request, "users/profile.html", context)
 
