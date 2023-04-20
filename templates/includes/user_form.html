@@ -1,0 +1,27 @@
+{% load widget_tweaks %}
+{% for field in form %}
+  <div class="form-group row my-3"
+    {% if field.field.required %}
+       aria-required="true"
+    {% else %}
+       aria-required="false"
+    {% endif %}
+  >
+    <label for="{{ field.id_for_label }}">
+      {{ field.label }}
+      {% if field.field.required %}
+        <span class="required text-danger">*</span>
+      {% endif %}
+    </label>
+    {{ field|add_class:"form-control border-8 mb-4 py-3 px-5 border-0 fs_24 SelfStorage__bg_lightgrey" }}
+    {% if field.help_text %}
+      <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
+        {{ field.help_text|safe }}
+      </small>
+    {% endif %}
+  </div>
+{% endfor %}
+<button type="submit"
+        class="btn border-8 py-3 px-5 mt-5 mb-3 w-100 text-white fs_24 SelfStorage__bg_orange SelfStorage__btn2_orange">
+  {{ button_caption }}
+</button>
