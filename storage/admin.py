@@ -20,4 +20,4 @@ class ImageAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['id', 'customer', 'box', 'start_order', 'end_order']
