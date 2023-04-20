@@ -8,7 +8,8 @@ from users.models import User
 
 class StorageQuerySet(models.QuerySet):
     def min_price(self):
-        return self.annotate(min_price=Min("boxes__price"))
+        return self.annotate(min_price=Min(
+            "boxes__price", filter=Q(boxes__is_available=True)))
 
     def available_boxes(self):
         return self.annotate(
