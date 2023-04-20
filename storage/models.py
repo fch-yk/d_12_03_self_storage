@@ -81,6 +81,10 @@ class Box(models.Model):
         verbose_name = "Бокс"
         verbose_name_plural = "Боксы"
 
+    @property
+    def square(self):
+        return self.width * self.length
+
     def __str__(self):
         return f"{self.number} - {self.is_available}"
 
