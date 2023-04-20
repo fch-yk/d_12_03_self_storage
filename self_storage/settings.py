@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'users',
     'storage',
+    'django_apscheduler',
 ]
 
 MIDDLEWARE = [
@@ -167,3 +168,8 @@ EMAIL_USE_SSL = env.bool('EMAIL_USE_SSL', default=True)
 
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+NOTIFICATION_MAILING_INTERVAL_MINUTES = env.str(
+    'NOTIFICATION_MAILING_INTERVAL_MINUTES',
+    default='1440'
+)
