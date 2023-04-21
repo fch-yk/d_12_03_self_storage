@@ -1,5 +1,6 @@
 import datetime
 import logging
+import re
 from textwrap import dedent
 
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -32,13 +33,60 @@ def get_orders_to_dates(dates):
 
 
 @util.close_old_connections
+def inform_about_last_rent_day():
+    now = localdate()
+    orders = get_orders_to_dates([now])
+    message_template = '''\
+    Здравствуйте, {name}!
+
+    Сегодня, {ends_at}, завершается срок аренды:
+    заказ № {order_id}
+    cклад {storage_descr}, по адресу {storage_address}
+    бокс № {box_number}.
+
+    Заберите, пожалуйста, вещи.
+    С завтрашнего дня хранение вещей будет происходить\
+    по повышенному тарифу.
+    Если Вы не заберете вещи в течение 6 месяцев, они будут утилизированы.
+
+    -----------
+    С уважением, администрация SelfStorage
+    '''
+    messages = []
+    for order in orders:
+        ends_at = order['end_order'].strftime('%d.%m.%Y')
+
+        message_text = message_template.format(
+            name=order['customer__first_name'],
+            order_id=order['id'],
+            storage_descr=order['box__storage__description'],
+            storage_address=order['box__storage__address'],
+            box_number=order['box__number'],
+            ends_at=ends_at,
+        )
+        message_text = re.sub(' +', ' ', message_text)
+        message = (
+            'Срок аренды завершен',
+            dedent(message_text),
+            None,
+            [order['customer__email']]
+        )
+
+        messages.append(message)
+
+    if not messages:
+        return
+
+    send_mass_mail(datatuple=messages)
+
+
+@util.close_old_connections
 def inform_about_rent_end():
     now = localdate()
     in_3_days = now + datetime.timedelta(days=3)
     in_1_week = now + datetime.timedelta(days=7)
     in_2_weeks = now + datetime.timedelta(days=14)
     in_1_month = now + relativedelta(months=1)
-    print(in_3_days, in_1_week, in_2_weeks, in_1_month)
 
     orders = get_orders_to_dates(
         [
@@ -136,7 +184,19 @@ class Command(BaseCommand):
             max_instances=1,
             replace_existing=True,
         )
-        logger.info("Added job 'my_job'.")
+        logger.info("Added job 'inform_about_rent_end'.")
+
+        scheduler.add_job(
+            inform_about_last_rent_day,
+            trigger=CronTrigger(
+                minute=f"*/{settings.NOTIFICATION_MAILING_INTERVAL_MINUTES}"
+            ),
+            # The `id` assigned to each job MUST be unique
+            id="Inform about last rent day",
+            max_instances=1,
+            replace_existing=True,
+        )
+        logger.info("Added job 'inform_about_last_rent_day'.")
 
         scheduler.add_job(
             delete_old_job_executions,
