@@ -33,6 +33,72 @@ def get_orders_to_dates(dates):
 
 
 @util.close_old_connections
+def inform_about_overdue_rent():
+    max_storage_term = 6
+    now = localdate()
+    dates_catalog = {}
+    dates = []
+    for months_number in range(1, 7):
+        search_date = now - relativedelta(months=months_number)
+        dates.append(search_date)
+        deadline = search_date + relativedelta(months=max_storage_term)
+        dates_catalog[search_date] = {
+            'months_number': months_number,
+            'deadline': deadline,
+        }
+
+    orders = get_orders_to_dates(dates)
+
+    message_template = '''\
+    Здравствуйте, {name}!
+
+    Cрок аренды завершился {months_number} мес. назад ({ends_at}) :
+    заказ № {order_id}
+    cклад {storage_descr}, по адресу {storage_address}
+    бокс № {box_number}.
+
+    Заберите, пожалуйста, вещи.
+    Сейчас они хранятся из расчета повышенного тарифа.
+    Если Вы не заберете вещи до {deadline}, они будут утилизированы.
+
+    -----------
+    С уважением, администрация SelfStorage
+    '''
+
+    messages = []
+    for order in orders:
+        ends_at = order['end_order']
+        date_card = dates_catalog[ends_at]
+        date_format = '%d.%m.%Y'
+        months_number = date_card['months_number']
+
+        message_text = message_template.format(
+            name=order['customer__first_name'],
+            order_id=order['id'],
+            storage_descr=order['box__storage__description'],
+            storage_address=order['box__storage__address'],
+            box_number=order['box__number'],
+            ends_at=ends_at.strftime(date_format),
+            months_number=months_number,
+            deadline=date_card['deadline'].strftime(date_format),
+        )
+
+        message = (
+            f'cрок аренды истек {months_number} мес. назад',
+            dedent(message_text),
+            None,
+            [order['customer__email']]
+        )
+
+        messages.append(message)
+
+    if not messages:
+        return
+
+    send_mass_mail(datatuple=messages)
+
+
+@util.close_old_connections
 def inform_about_last_rent_day():
     now = localdate()
     orders = get_orders_to_dates([now])
@@ -197,6 +263,18 @@ class Command(BaseCommand):
             replace_existing=True,
         )
         logger.info("Added job 'inform_about_last_rent_day'.")
+
+        scheduler.add_job(
+            inform_about_overdue_rent,
+            trigger=CronTrigger(
+                minute=f"*/{settings.NOTIFICATION_MAILING_INTERVAL_MINUTES}"
+            ),
+            # The `id` assigned to each job MUST be unique
+            id="inform about overdue rent",
+            max_instances=1,
+            replace_existing=True,
+        )
+        logger.info("Added job 'inform about overdue rent'.")
 
         scheduler.add_job(
             delete_old_job_executions,
