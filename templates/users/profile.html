@@ -29,21 +29,15 @@
               <div class="col-12 col-sm-5 d-flex flex-column align-items-center">
                 <img src="{%  static 'img/image10.png' %}" class="rounded-pill mb-3" alt="">
                 <input type="name" name="NAME_EDIT" id="NAME" class="form-control fs_24 ps-2 SelfStorage__name_input"
-                         value="{{ current_user.get_full_name }}" disabled>
-{#                <h4>{{ current_user.get_full_name }}</h4>#}
+                         value="{{ user.get_full_name }}" disabled>
               </div>
               <div class="col-12 col-sm-7 d-flex flex-column">
-{#                <form method="post">#}
-{#                    {% csrf_token %}#}
                   <label class="fs_24 SelfStorage_green ms-2" for="EMAIL">E-mail</label>
                   <input type="email" name="EMAIL_EDIT" id="EMAIL" class="form-control fs_24 ps-2 SelfStorage__input"
-                         value="{{ current_user.email }}" disabled>
+                         value="{{ user.email }}" disabled>
                   <label class="fs_24 SelfStorage_green ms-2" for="PHONE">Телефон</label>
                   <input type="tel" name="PHONE_EDIT" id="PHONE" class="form-control fs_24 ps-2 SelfStorage__input"
-                         value="{{ current_user.phone }}" disabled>
-                  <label class="fs_24 SelfStorage_green ms-2" for="PASSWORD">Пароль</label>
-                  <input type="password" name="PASSWORD_EDIT" id="PASSWORD"
-                         class="form-control fs_24 ps-2 SelfStorage__input" value="111" disabled>
+                         value="{{ user.phone }}" disabled>
                   <button type="submit" class="btn SelfStorage_green ps-1" id="save" style="display: none">Сохранить
                   </button>
                   <a class="btn SelfStorage_orange ps-1" id="edit">Редактировать</a>
@@ -53,8 +47,6 @@
                       document.getElementById('NAME').disabled = false
                       document.getElementById('EMAIL').disabled = false
                       document.getElementById('PHONE').disabled = false
-                      document.getElementById('PASSWORD').disabled = false
-                      document.getElementById('PASSWORD').type = 'text'
                       document.getElementById('edit').style.display = 'none'
                       document.getElementById('save').style.display = 'inline-block'
                     })
@@ -63,14 +55,11 @@
                         document.getElementById('NAME').disabled = true
                         document.getElementById('EMAIL').disabled = true
                         document.getElementById('PHONE').disabled = true
-                        document.getElementById('PASSWORD').disabled = true
-                        document.getElementById('PASSWORD').type = 'password'
                         document.getElementById('edit').style.display = 'inline-block'
                         document.getElementById('save').style.display = 'none'
                       }, 0)
                     })
                   </script>
-{#                </form>#}
               </div>
             </div>
               </form>
@@ -92,6 +81,7 @@
               <h4>{{ order.start_order }} - {{ order.end_order }}</h4>
               <div>
                 <button
+                  onclick="window.location.href='{% url 'storage:payment' order.box.id %}'"
                   class="btn fs_24 px-5 py-3 text-white border-8 SelfStorage__bg_green SelfStorage__btn2_green mb-3">
                   Продлить аренду
                 </button>
