@@ -79,4 +79,4 @@ def make_qr_code(request, order_id):
         )
         email.attach(image)
         email.send()
-        return redirect("users:profile", request.user.username)
+    return redirect("users:profile", request.user.username)

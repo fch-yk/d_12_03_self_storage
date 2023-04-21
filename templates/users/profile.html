@@ -109,20 +109,10 @@
                 url: '{% url "storage:make_qr_code" order.id %}',
                 data: { csrfmiddlewaretoken: '{{ csrf_token }}'  },
                 success: function () {
-                    toastr.info('QR-code отправлен на почту, указанную при регистрации!');
-                    $('.toast-info').css({
-                      'background-color': 'blue',
-                      'color': 'black',
-                      'font-size': '18px'
-                       });
+                    toastr.success('QR-code отправлен на почту, указанную при регистрации!');
                     },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    toastr.error('Ошибка, повторите позже!');
-                    $('.toast-error').css({
-                      'background-color': 'red',
-                      'color': 'black',
-                      'font-size': '18px'
-                       });
+                error: function () {
+                    toastr.warning('Ошибка, повторите позже!');
                     }
                 });
             }
