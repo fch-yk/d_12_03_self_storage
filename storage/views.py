@@ -57,25 +57,26 @@ def show_payment_page(request, box_id):
 
 
 def make_qr_code(request, order_id):
-    order = Order.objects.get(pk=order_id)
-    order_info = f'''
-        Адрес склада: {order.box.storage.address}
-        Номер бокса: {order.box.number}
-        Срок аренды: {order.start_order} - {order.end_order}
-    '''
-    qr = qrcode.QRCode(version=1, box_size=10, border=5)
-    qr.add_data(order_info)
-    qr_code = qr.make_image(fill_color="black", back_color="white")
-    qr_bytes = io.BytesIO()
-    qr_code.save(qr_bytes, format='PNG')
-    qr_bytes.seek(0)
-    image = MIMEImage(qr_bytes.read())
-    email = EmailMessage(
-        'Your QR',
-        'Your QR-code in attachments',
-        settings.EMAIL_HOST_USER,
-        [request.user.email],
-    )
-    email.attach(image)
-    email.send()
-    return redirect("users:profile", request.user.username)
+    if request.method == "POST":
+        order = Order.objects.get(pk=order_id)
+        order_info = f'''
+            Адрес склада: {order.box.storage.address}
+            Номер бокса: {order.box.number}
+            Срок аренды: {order.start_order} - {order.end_order}
+        '''
+        qr = qrcode.QRCode(version=1, box_size=10, border=5)
+        qr.add_data(order_info)
+        qr_code = qr.make_image(fill_color="black", back_color="white")
+        qr_bytes = io.BytesIO()
+        qr_code.save(qr_bytes, format='PNG')
+        qr_bytes.seek(0)
+        image = MIMEImage(qr_bytes.read())
+        email = EmailMessage(
+            'Your QR',
+            'Your QR-code in attachments',
+            settings.EMAIL_HOST_USER,
+            [request.user.email],
+        )
+        email.attach(image)
+        email.send()
+        return redirect("users:profile", request.user.username)
