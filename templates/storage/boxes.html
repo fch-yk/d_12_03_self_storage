@@ -29,26 +29,51 @@
       <h1 class="text-center fw-bold SelfStorage_green mb-5">Аренда боксов</h1>
       <h6 class="text-center SelfStorage_grey">Арендуйте склад индивидуального хранения по уникальной цене прямо
         сейчас</h6>
+
+        <button onclick="getLocation()" class="btn w-auto py-3 px-5 SelfStorage__bg_orange SelfStorage__btn2_orange text-white text-center fs_15 border-8" style="margin-left: 480px; margin-top: 10px">Подсветить ближайший склад</button>
+        {% if client_address %}
+        <h6 class="text-center SelfStorage_grey">Ваш адрес: {{ client_address }}</h6>
+        {% endif %}
+
       <a href="#BOX" id="toBox" class="d-none"></a>
       <ul class="nav nav-pills mb-3 d-flex justify-content-between" id="boxes-links" role="tablist">
         {% for storage in storages %}
           <li class="nav-item flex-grow-1 mx-2" role="presentation">
             <a href="#BOX" class="row text-decoration-none py-3 px-4 mt-5 SelfStorage__boxlink"
                id="pills-{{ storage.id }}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{ storage.id }}" role="tab"
-               aria-controls="pills-{{ storage.id }}" aria-selected="true">
+               aria-controls="pills-{{ storage.id }}" aria-selected="true" {% if storage.nearest %}style="background-color: rgb(129, 236, 129)"{% endif %}>
               <div class="col-12 col-lg-3 d-flex justify-content-center">
                 <img src="{{ storage.images.first.image.url }}" alt="{{ storage }}" class="mb-3 mb-lg-0">
               </div>
               <div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
                 <h4 class="text-center">{{ storage.city }}</h4>
-                <h6 class="text-center">{{ storage.address }}</h6>
+                <h6 class="text-center">{{ storage.address }}
+                  {% if show_distances and not storage.distance_error%}
+                      ({{ storage.distance|floatformat}} км)
+                  {% endif %}
+                </h6>
               </div>
               <div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-                <h4 class="text-center">{{ storage.empty_boxes }} из {{ storage.all_boxes }}</h4>
-                <h6 class="text-center">Боксов свободно</h6>
+                <h4 class="text-center">
+                  {% if storage.empty_boxes %}
+                    {{ storage.empty_boxes }} из {{ storage.all_boxes }}
+                  {% else %}
+                    Нет свободных боксов
+                  {% endif %}
+                </h4>
+                <h6 class="text-center">
+                  {% if storage.empty_boxes %}
+                    Боксов свободно
+                    {% endif %}
+                </h6>
               </div>
               <div class="col-12 col-md-4 col-lg-3 d-flex flex-column justify-content-center">
-                <h4 class="text-center SelfStorage_green">от {{ storage.min_price }}</h4>
+                <h4 class="text-center SelfStorage_green">
+                  {% if storage.min_price%}
+                    от {{ storage.min_price }}
+                  {% endif %}
+
+                </h4>
                 <h6 class="text-center">{{ storage.get_special_property_display }}</h6>
               </div>
             </a>
@@ -227,6 +252,16 @@
         </button>
         <script>
           document.getElementById('btn-collapse-to10').addEventListener('click', () => document.getElementById('btn-collapse-to10').classList.add('d-none'))
+
+          function getLocation() {
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPosition);
+            }
+          }
+
+          function showPosition(position) {
+            window.open("/boxes?latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude, "_self")
+          }
         </script>
       </div>
 
