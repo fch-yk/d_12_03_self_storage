@@ -115,6 +115,7 @@ class Order(models.Model):
     )
     end_order = models.DateField(verbose_name="Конец аренды")
     is_payment = models.BooleanField(verbose_name="Оплачен")
+    payment_id = models.CharField(verbose_name="Айди платежа", max_length=100, blank=True)
     need_delivery = models.BooleanField(verbose_name="Требуется доставка", default=False)
     need_measurements = models.BooleanField(verbose_name="Требуется замер", default=False)
     price = models.PositiveSmallIntegerField(verbose_name="Стоимость")

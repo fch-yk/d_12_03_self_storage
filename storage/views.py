@@ -1,7 +1,13 @@
 import datetime
 import io
 import sys
+import json
 from email.mime.image import MIMEImage
+import uuid
+
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from yookassa import Configuration, Payment
 
 import qrcode
 
@@ -13,7 +19,9 @@ from geopy.geocoders import Nominatim
 
 from geo.models import Location
 from self_storage import settings
-from storage.models import Box, Order, Storage
+from self_storage.settings import API_KEY, SHOP_ID
+
+from storage.models import Storage, Order, Box
 
 
 def show_home(request):
@@ -100,18 +108,19 @@ def show_payment_page(request, box_id):
     template = "storage/payment.html"
 
     box = get_object_or_404(Box, id=box_id)
-    context = {"box": box}
-    if request.POST:
-        Order.objects.create(
-            customer=request.user,
-            box=box,
-            is_payment=True,
-            price=box.price,
-            end_order=datetime.datetime.now() + datetime.timedelta(days=30)
-        )
-        box.is_available = False
-        box.save()
-        return redirect("users:profile", request.user.username)
+    order = Order.objects.create(
+        customer=request.user,
+        box=box,
+        is_payment=False,
+        price=box.price,
+        end_order=datetime.datetime.now() + datetime.timedelta(days=30)
+    )
+    box.is_available = False
+    box.save()
+    context = {"order": order}
+
+    #
+    #     return redirect("storage:make_payment")
 
     return render(request, template, context)
 
@@ -140,3 +149,48 @@ def make_qr_code(request, order_id):
         email.attach(image)
         email.send()
     return redirect("users:profile", request.user.username)
+
+
+def make_payment(request, order_id):
+    if request.method == "GET":
+        Configuration.account_id = SHOP_ID
+        Configuration.secret_key = API_KEY
+
+        price = Order.objects.get(id=order_id).price
+        payment = Payment.create({
+            "amount": {
+                "value": price,
+                "currency": "RUB"
+            },
+            "confirmation": {
+                "type": "redirect",
+                "return_url": 'http://127.0.0.1:8000/auth/profile/'
+            },
+            "capture": True,
+            "description": order_id
+        }, uuid.uuid4())
+
+        order = Order.objects.get(id=order_id)
+        order.payment_id = payment.id
+        order.save()
+
+        confirmation_url = payment.confirmation.confirmation_url
+
+        return redirect(confirmation_url)
+
+@csrf_exempt
+def update_payment_status(request):
+    if request.method == 'POST':
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        if body['object']['status'] == 'succeeded':
+            payment_id = body['object']['id']
+            order = Order.objects.get(payment_id=payment_id)
+            order.is_payment = True
+            order.save()
+    return HttpResponse(status=200)
+
+
+
+
+
