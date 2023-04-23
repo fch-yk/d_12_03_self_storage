@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'users',
     'storage',
     'django_apscheduler',
+    'geo',
 ]
 
 MIDDLEWARE = [
@@ -173,3 +174,4 @@ NOTIFICATION_MAILING_INTERVAL_MINUTES = env.str(
     'NOTIFICATION_MAILING_INTERVAL_MINUTES',
     default='59'
 )
+YA_API_KEY = env.str('YA_API_KEY')

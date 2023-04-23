@@ -1,16 +1,18 @@
 import datetime
 import io
+import sys
 from email.mime.image import MIMEImage
 
 import qrcode
-from django.core.mail import EmailMessage
-
-from self_storage import settings
-
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404, redirect, render
+from geopy.distance import distance
+from geopy.geocoders import Nominatim
 
-from storage.models import Storage, Order, Box
+from geo.models import Location
+from self_storage import settings
+from storage.models import Box, Order, Storage
 
 
 def show_home(request):
@@ -25,14 +27,72 @@ def show_faq_page(request):
     return render(request, template, context=context)
 
 
+def get_storage_distance(storage):
+    return storage.distance
+
+
 def show_boxes_page(request):
     storages = (
-        Storage.objects.prefetch_related("boxes").min_price().available_boxes().all()
+        Storage.objects.prefetch_related(
+            "boxes"
+        ).prefetch_related('images').min_price().available_boxes().all()
     )
 
-    context = {"storages": storages}
+    show_distances = False
+    client_address = ''
+    for storage in storages:
+        storage.nearest = False
+
+    if storages and 'latitude' in request.GET and 'longitude' in request.GET:
+        show_distances = True
+        client_latitude = float(request.GET['latitude'])
+        client_longitude = float(request.GET['longitude'])
+        geolocator = Nominatim(user_agent="d_12_03_self_storage")
+        client_address = geolocator.reverse(
+            (client_latitude, client_longitude)
+        ).address
+
+        addresses = set()
+        for storage in storages:
+            addresses.add(storage.address)
+
+        locations_catalog = {}
+        locations = Location.objects.filter(address__in=addresses).values(
+            'address',
+            'latitude',
+            'longitude',
+        )
+        for location in locations:
+            locations_catalog[location['address']] = {
+                'latitude': location['latitude'],
+                'longitude': location['longitude'],
+            }
+
+        for storage in storages:
+            storage.distance_error = False
+            storage_location = locations_catalog.get(storage.address, None)
+            if not storage_location:
+                storage.distance_error = True
+                storage.distance = sys.maxsize
+                continue
+
+            storage.distance = distance(
+                (client_latitude, client_longitude),
+                (storage_location['latitude'], storage_location['longitude'])
+            ).km
+
+        if not all(storage.distance_error for storage in storages):
+            nearest_storage = min(storages, key=get_storage_distance)
+            nearest_storage.nearest = True
+
+    context = {
+        "storages": storages,
+        'show_distances': show_distances,
+        'client_address': client_address
+    }
     template = "storage/boxes.html"
     return render(request, template, context=context)
+
 
 @login_required()
 def show_payment_page(request, box_id):
