@@ -1,11 +1,10 @@
-from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth import authenticate, login
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView
 
 from storage.models import Order
 from .forms import CreationForm
-from django.views.generic.edit import CreateView
-from django.urls import reverse_lazy
-
-from .models import User
 
 
 class SignUp(CreateView):
@@ -13,6 +12,12 @@ class SignUp(CreateView):
     success_url = reverse_lazy('storage:index')
     template_name = 'users/signup.html'
 
+    def form_valid(self, form):
+        valid = super(SignUp, self).form_valid(form)
+        email, password = form.cleaned_data.get('email'), form.cleaned_data.get('password1')
+        new_user = authenticate(email=email, password=password)
+        login(self.request, new_user)
+        return valid
 
 def profile(request):
     orders = Order.objects.filter(customer=request.user).days_left()
@@ -36,4 +41,3 @@ def profile(request):
         return redirect("users:profile")
 
     return render(request, "users/profile.html", {'orders': orders})
-

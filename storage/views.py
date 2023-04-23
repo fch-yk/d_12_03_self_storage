@@ -4,6 +4,7 @@ import sys
 from email.mime.image import MIMEImage
 
 import qrcode
+
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404, redirect, render
@@ -110,7 +111,6 @@ def show_payment_page(request, box_id):
         )
         box.is_available = False
         box.save()
-
         return redirect("users:profile", request.user.username)
 
     return render(request, template, context)
