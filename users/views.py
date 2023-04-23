@@ -19,7 +19,6 @@ class SignUp(CreateView):
         login(self.request, new_user)
         return valid
 
-
 def profile(request):
     orders = Order.objects.filter(customer=request.user).days_left()
 
