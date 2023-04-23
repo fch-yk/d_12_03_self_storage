@@ -9,6 +9,7 @@ services:
     volumes:
       - media_value:/app/media/
       - static_value:/app/static/
+
     env_file:
       - ../.env
     depends_on:
