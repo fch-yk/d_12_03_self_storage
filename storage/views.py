@@ -4,13 +4,10 @@ from email.mime.image import MIMEImage
 
 import qrcode
 from django.core.mail import EmailMessage
-
-from self_storage import settings
-
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
-from storage.models import Storage, Order, Box
+from self_storage import settings
+from storage.models import Box, Order, Storage
 
 
 def show_home(request):
@@ -34,7 +31,7 @@ def show_boxes_page(request):
     template = "storage/boxes.html"
     return render(request, template, context=context)
 
-@login_required()
+
 def show_payment_page(request, box_id):
     template = "storage/payment.html"
 
@@ -50,7 +47,6 @@ def show_payment_page(request, box_id):
         )
         box.is_available = False
         box.save()
-
         return redirect("users:profile", request.user.username)
 
     return render(request, template, context)
