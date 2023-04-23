@@ -1,0 +1,600 @@
+[
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2023-04-18T13:39:06.399Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "1",
+        "object_repr": "Москва - Образцова, 38",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2023-04-18T13:39:37.710Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "1",
+        "object_repr": "Image object (1)",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2023-04-19T05:48:01.874Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "1",
+        "object_repr": "Москва - Образцова, 38",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2023-04-19T06:21:31.870Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "1",
+        "object_repr": "Москва - ул. Рокотова, д. 15",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2023-04-19T06:23:50.040Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "1",
+        "object_repr": "1234-56 - True",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2023-04-19T06:25:07.110Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "2",
+        "object_repr": "1234-57 - True",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2023-04-19T06:27:26.841Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "2",
+        "object_repr": "Одинцово - ул. Северная, д.36",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2023-04-19T06:28:04.224Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "3",
+        "object_repr": "111-22 - True",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+        "action_time": "2023-04-19T06:28:30.483Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "4",
+        "object_repr": "111-33 - False",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+        "action_time": "2023-04-19T06:28:53.012Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "5",
+        "object_repr": "111-44 - False",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+        "action_time": "2023-04-19T06:29:19.700Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "6",
+        "object_repr": "111-55 - True",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+        "action_time": "2023-04-19T06:30:46.217Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "3",
+        "object_repr": "Пушкино - ул. Строителей, д. 5",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+        "action_time": "2023-04-19T06:31:33.545Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "7",
+        "object_repr": "1-2-3 - True",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+        "action_time": "2023-04-19T06:31:56.593Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "8",
+        "object_repr": "1-2-4 - False",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+        "action_time": "2023-04-19T06:32:18.502Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "9",
+        "object_repr": "1-2-5 - True",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+        "action_time": "2023-04-19T06:33:04.017Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "2",
+        "object_repr": "2 - Москва - ул. Рокотова, д. 15",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+        "action_time": "2023-04-19T06:33:13.317Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "3",
+        "object_repr": "3 - Одинцово - ул. Северная, д.36",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+        "action_time": "2023-04-19T06:33:29.715Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "4",
+        "object_repr": "4 - Пушкино - ул. Строителей, д. 5",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+        "action_time": "2023-04-19T06:33:44.134Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "5",
+        "object_repr": "5 - Москва - ул. Рокотова, д. 15",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+        "action_time": "2023-04-19T08:03:24.673Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "5",
+        "object_repr": "5 - Москва - ул. Рокотова, д. 15",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+        "action_time": "2023-04-19T08:03:35.852Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "4",
+        "object_repr": "4 - Пушкино - ул. Строителей, д. 5",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields": {
+        "action_time": "2023-04-19T08:03:43.716Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "3",
+        "object_repr": "3 - Одинцово - ул. Северная, д.36",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+        "action_time": "2023-04-19T08:03:56.362Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "2",
+        "object_repr": "2 - Москва - ул. Рокотова, д. 15",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+        "action_time": "2023-04-19T08:04:09.963Z",
+        "user": 1,
+        "content_type": 10,
+        "object_id": "6",
+        "object_repr": "6 - Москва - ул. Рокотова, д. 15",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+        "action_time": "2023-04-19T13:10:54.797Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "10",
+        "object_repr": "666 - True",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields": {
+        "action_time": "2023-04-19T19:14:21.140Z",
+        "user": 1,
+        "content_type": 9,
+        "object_id": "10",
+        "object_repr": "666 - True",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"\\u042d\\u0442\\u0430\\u0436\"]}}]"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "txoj2ohq20jzr8o4npyg317rtskf2q4l",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQRe_C2hCmBQGX7j0DmWFAqgaS0q6MdzckXej2v_f-WwTctxL2ntawsLgIEKffjTA-Ux2AH1jvTcZWt3UhORR50C5vjdPrerh_BwV7GTXnKToGYOVMtl5D0ooZrYeYrCMTEbKeyaDy83z2BJT9pAGtsS6xE58v9XY4Cw:1pp0e1:KPOjsLRao-kTNayCMDH3qen1q-zsue6OetS_rmCNxVQ",
+        "expire_date": "2023-05-03T05:46:17.219Z"
+    }
+},
+{
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$UqdQfSzqcvSiRtio5x8hdJ$cQS+vV/iV5U+E9OFpxLQdaflNPMiKNG18nzWHR5irCc=",
+        "last_login": "2023-04-19T05:46:17.207Z",
+        "is_superuser": true,
+        "username": "leeny_the_bear",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-04-18T13:37:39.411Z",
+        "email": "Leeny@inbox.ru",
+        "phone": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$oi3Ol0Sjo0L1fysaoUWHP5$79dYv3Sv7H/ZFaZDaM8CbRR2f+oApBRR0w02z43ncu4=",
+        "last_login": "2023-04-18T15:02:31.190Z",
+        "is_superuser": false,
+        "username": "leeny",
+        "first_name": "Елена",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-04-18T14:12:02.579Z",
+        "email": "Leeny2@inbox.ru",
+        "phone": "89134600307",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "storage.storage",
+    "pk": 1,
+    "fields": {
+        "city": "Москва",
+        "address": "ул. Рокотова, д. 15",
+        "description": "Красивый, удобный",
+        "temperature": 17,
+        "max_height": "1.31",
+        "contact": "8 (383) 222-77-88 Эльмира",
+        "route_description": "Прямо и налево",
+        "special_property": "NEAR_THE_SUBWAY"
+    }
+},
+{
+    "model": "storage.storage",
+    "pk": 2,
+    "fields": {
+        "city": "Одинцово",
+        "address": "ул. Северная, д.36",
+        "description": "Маленький, неудобный",
+        "temperature": 18,
+        "max_height": "3.00",
+        "contact": "8(3522) 218-88-99 Вадим",
+        "route_description": "3 переулок, направо",
+        "special_property": "PARKING"
+    }
+},
+{
+    "model": "storage.storage",
+    "pk": 3,
+    "fields": {
+        "city": "Пушкино",
+        "address": "ул. Строителей, д. 5",
+        "description": "Высокие потолки",
+        "temperature": 20,
+        "max_height": "5.00",
+        "contact": "ggdghdb@mail.ru",
+        "route_description": "",
+        "special_property": "HIGH_CEILING"
+    }
+},
+{
+    "model": "storage.box",
+    "pk": 1,
+    "fields": {
+        "storage": 1,
+        "floor": 1,
+        "number": "1234-56",
+        "width": 2.58,
+        "length": 13.0,
+        "height": 1.0,
+        "is_available": true,
+        "price": 1000
+    }
+},
+{
+    "model": "storage.box",
+    "pk": 2,
+    "fields": {
+        "storage": 1,
+        "floor": 2,
+        "number": "1234-57",
+        "width": 2.0,
+        "length": 2.0,
+        "height": 1.0,
+        "is_available": true,
+        "price": 2000
+    }
+},
+{
+    "model": "storage.box",
+    "pk": 3,
+    "fields": {
+        "storage": 2,
+        "floor": 1,
+        "number": "111-22",
+        "width": 4.0,
+        "length": 7.0,
+        "height": 3.0,
+        "is_available": true,
+        "price": 2500
+    }
+},
+{
+    "model": "storage.box",
+    "pk": 4,
+    "fields": {
+        "storage": 2,
+        "floor": 3,
+        "number": "111-33",
+        "width": 2.0,
+        "length": 7.0,
+        "height": 2.0,
+        "is_available": false,
+        "price": 2500
+    }
+},
+{
+    "model": "storage.box",
+    "pk": 5,
+    "fields": {
+        "storage": 2,
+        "floor": 4,
+        "number": "111-44",
+        "width": 3.0,
+        "length": 7.0,
+        "height": 3.0,
+        "is_available": false,
+        "price": 3000
+    }
+},
+{
+    "model": "storage.box",
+    "pk": 6,
+    "fields": {
+        "storage": 2,
+        "floor": 4,
+        "number": "111-55",
+        "width": 4.0,
+        "length": 4.0,
+        "height": 1.0,
+        "is_available": true,
+        "price": 1500
+    }
+},
+{
+    "model": "storage.box",
+    "pk": 7,
+    "fields": {
+        "storage": 3,
+        "floor": 1,
+        "number": "1-2-3",
+        "width": 2.0,
+        "length": 7.0,
+        "height": 5.0,
+        "is_available": true,
+        "price": 5000
+    }
+},
+{
+    "model": "storage.box",
+    "pk": 8,
+    "fields": {
+        "storage": 3,
+        "floor": 2,
+        "number": "1-2-4",
+        "width": 3.0,
+        "length": 2.0,
+        "height": 4.0,
+        "is_available": false,
+        "price": 4000
+    }
+},
+{
+    "model": "storage.box",
+    "pk": 9,
+    "fields": {
+        "storage": 3,
+        "floor": 3,
+        "number": "1-2-5",
+        "width": 5.0,
+        "length": 5.0,
+        "height": 5.0,
+        "is_available": true,
+        "price": 5500
+    }
+},
+{
+    "model": "storage.box",
+    "pk": 10,
+    "fields": {
+        "storage": 1,
+        "floor": 2,
+        "number": "666",
+        "width": 1.0,
+        "length": 1.0,
+        "height": 1.0,
+        "is_available": true,
+        "price": 666
+    }
+},
+{
+    "model": "storage.image",
+    "pk": 2,
+    "fields": {
+        "storage": 1,
+        "image": "imgs/image11.png"
+    }
+},
+{
+    "model": "storage.image",
+    "pk": 3,
+    "fields": {
+        "storage": 2,
+        "image": "imgs/image15.png"
+    }
+},
+{
+    "model": "storage.image",
+    "pk": 4,
+    "fields": {
+        "storage": 3,
+        "image": "imgs/image151.png"
+    }
+},
+{
+    "model": "storage.image",
+    "pk": 6,
+    "fields": {
+        "storage": 1,
+        "image": "imgs/image2.png"
+    }
+}
+]
