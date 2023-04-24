@@ -1,27 +1,25 @@
 import datetime
 import io
-import sys
 import json
-from email.mime.image import MIMEImage
+import sys
 import uuid
+from email.mime.image import MIMEImage
 
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-from yookassa import Configuration, Payment
 
 import qrcode
-
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.csrf import csrf_exempt
 from geopy.distance import distance
 from geopy.geocoders import Nominatim
+from yookassa import Configuration, Payment
 
 from geo.models import Location
 from self_storage import settings
-from self_storage.settings import API_KEY, SHOP_ID
-
-from storage.models import Storage, Order, Box
+from self_storage.settings import API_KEY, SHOP_ID, RETURN_URL
+from storage.models import Box, Order, Storage
 
 
 def show_home(request):
@@ -119,9 +117,6 @@ def show_payment_page(request, box_id):
     box.save()
     context = {"order": order}
 
-    #
-    #     return redirect("storage:make_payment")
-
     return render(request, template, context)
 
 
@@ -164,7 +159,7 @@ def make_payment(request, order_id):
             },
             "confirmation": {
                 "type": "redirect",
-                "return_url": redirect("users:profile")
+                "return_url": RETURN_URL
             },
             "capture": True,
             "description": order_id
@@ -175,7 +170,6 @@ def make_payment(request, order_id):
         order.save()
 
         confirmation_url = payment.confirmation.confirmation_url
-
         return redirect(confirmation_url)
 
 @csrf_exempt
