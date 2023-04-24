@@ -66,7 +66,6 @@ AUTH_USER_MODEL = 'users.User'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 'DIRS': [],
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -172,6 +171,8 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 SHOP_ID = env.int('SHOP_ID')
 API_KEY = env.str('API_KEY')
+RETURN_URL = env.str('RETURN_URL')
+
 PAYMENT_GATEWAY_URL = 'https://api.yookassa.ru/v3/'
 
 NOTIFICATION_MAILING_INTERVAL_MINUTES = env.str(
