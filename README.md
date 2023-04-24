@@ -39,6 +39,9 @@ pip install -r requirements.txt
   - `EMAIL_HOST_PASSWORD` - a password to use for the SMTP server (obligatory);
   - `DEFAULT_FROM_EMAIL` - a default email address (optional if `EMAIL_HOST_USER` contains email address);
   - `NOTIFICATION_MAILING_INTERVAL_MINUTES` - an interval for mailing notifications, optional, `59` by default.
+  - `SHOP_ID` - a shop_id for payment via youkassa
+  - `API_KEY` - a api_key for payment via youkassa
+  - `RETURN_URL` - a url to go to after successful payment
 
 To set up variables in .env file, create it in the root directory of the project and fill it up like this:
 
@@ -54,6 +57,10 @@ EMAIL_HOST_USER=REPLACE_ME
 EMAIL_HOST_PASSWORD=REPLACE_ME
 DEFAULT_FROM_EMAIL=REPLACE_ME
 NOTIFICATION_MAILING_INTERVAL_MINUTES=10
+SHOP_ID=REPLACE_ME
+API_KEY=REPLACE_ME
+RETURN_URL=https://127.0.0.1:8000/auth/profile/
+
 ```
 
 - Create SQLite database:
@@ -84,6 +91,19 @@ python manage.py runapscheduler
 
 - Go to [the admin site](http://127.0.0.1:8000/admin/) and fill the base;
 - Go to [the home page](http://127.0.0.1:8000/).
+
+
+## Production mode
+* On the server, clone the repository to the /opt folder
+* Add .env to the /opt/d_12_03_self_storage folder with the necessary variables
+
+* Set the rights to run the deployment script
+```chmod +x storage_docker.sh```
+* Run the script
+``./storage_docker.sh ``
+
+* At the end of the deployment, the site works at the ip address of the server.
+* SSL and domain are additionally configured manually
 
 ## Project goals
 
