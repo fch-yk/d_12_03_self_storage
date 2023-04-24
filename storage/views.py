@@ -164,7 +164,7 @@ def make_payment(request, order_id):
             },
             "confirmation": {
                 "type": "redirect",
-                "return_url": 'http://127.0.0.1:8000/auth/profile/'
+                "return_url": redirect("users:profile")
             },
             "capture": True,
             "description": order_id
