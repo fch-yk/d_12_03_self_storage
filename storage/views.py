@@ -5,7 +5,6 @@ import sys
 import uuid
 from email.mime.image import MIMEImage
 
-
 import qrcode
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
@@ -18,7 +17,7 @@ from yookassa import Configuration, Payment
 
 from geo.models import Location
 from self_storage import settings
-from self_storage.settings import API_KEY, SHOP_ID, RETURN_URL
+from self_storage.settings import API_KEY, RETURN_URL, SHOP_ID
 from storage.models import Box, Order, Storage
 
 
@@ -159,7 +158,7 @@ def make_payment(request, order_id):
             },
             "confirmation": {
                 "type": "redirect",
-                "return_url": RETURN_URL
+                "return_url": request.build_absolute_uri('/auth/profile/')
             },
             "capture": True,
             "description": order_id
@@ -172,6 +171,7 @@ def make_payment(request, order_id):
         confirmation_url = payment.confirmation.confirmation_url
         return redirect(confirmation_url)
 
+
 @csrf_exempt
 def update_payment_status(request):
     if request.method == 'POST':
@@ -183,8 +183,3 @@ def update_payment_status(request):
             order.is_payment = True
             order.save()
     return HttpResponse(status=200)
-
-
-
-
-

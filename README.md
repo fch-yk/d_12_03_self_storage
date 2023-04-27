@@ -41,7 +41,6 @@ pip install -r requirements.txt
   - `NOTIFICATION_MAILING_INTERVAL_MINUTES` - an interval for mailing notifications, optional, `59` by default.
   - `SHOP_ID` - a shop_id for payment via youkassa
   - `API_KEY` - a api_key for payment via youkassa
-  - `RETURN_URL` - a url to go to after successful payment
 
 To set up variables in .env file, create it in the root directory of the project and fill it up like this:
 
@@ -59,7 +58,6 @@ DEFAULT_FROM_EMAIL=REPLACE_ME
 NOTIFICATION_MAILING_INTERVAL_MINUTES=10
 SHOP_ID=REPLACE_ME
 API_KEY=REPLACE_ME
-RETURN_URL=https://127.0.0.1:8000/auth/profile/
 
 ```
 
